@@ -26,7 +26,7 @@ class Button extends StatelessWidget {
       height: screenSize.height * heightFactor,
       width: widthFactor != 0 ? screenSize.width * widthFactor : null,
       decoration: BoxDecoration(
-          color: AppTheme.buttonColor,
+          color: AppTheme.appBarColor,
           borderRadius: BorderRadius.circular(8.0)),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jamaathi/Controller/LoginController.dart';
-import '../Component/AppTheme.dart';
+import 'package:jamaathi/routes/AppRoutes.dart';
 import '../Component/forms.dart';
 
 class LoginScreen extends GetView<LoginController> {
@@ -16,22 +16,51 @@ class LoginScreen extends GetView<LoginController> {
       builder: (controller) {
         return SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.black,
-              leading: InkWell(
+            backgroundColor: Colors.white,
+            appBar: PreferredSize(
+              preferredSize:
+                  Size(100, 70), // Set the desired height for the AppBar
+              child: AppBar(
+                automaticallyImplyLeading: false,
+                leading: InkWell(
                   onTap: () {
                     Get.back();
                   },
-                  child: Column(
+                ),
+                bottomOpacity: 0.0,
+                elevation: 0.0,
+                flexibleSpace: Container(
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                    ),
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.grey.withOpacity(0.5),
+                    //     spreadRadius: 2.0,
+                    //     blurRadius: 1.0,
+                    //     offset: Offset(0, 2), // Set the elevation values
+                    //   ),
+                    // ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 23,
+                      Image(
+                        image: AssetImage(
+                          'assets/images/logo.png',
+                        ),
+                        height: 90,
                       ),
-                      Icon(Icons.arrow_back),
                     ],
-                  )),
+                  ),
+                ),
+                backgroundColor: Colors.transparent,
+              ),
             ),
-            backgroundColor: Colors.black,
             body: SingleChildScrollView(
               reverse: true,
               child: Padding(
@@ -42,94 +71,68 @@ class LoginScreen extends GetView<LoginController> {
                     SizedBox(
                       height: 20,
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)),
-                          labelText: 'Name',
-                          labelStyle: TextStyle(
-                              color: Colors.grey) // Add padding as needed
-                          ),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Obx(() => TextField(
-                          controller: controller.passwordController,
-                          obscureText: !loginController.isVisible.value,
-                          decoration: InputDecoration(
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)),
-                              labelText: 'Password',
-                              labelStyle: TextStyle(color: Colors.grey),
-                              suffixIcon: InkWell(
-                                onTap: () {
-                                  loginController.toggleVisibility();
-                                },
-                                child: Icon(
-                                  color: Colors.grey,
-                                  loginController.isVisible.value
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                              )),
-                          style: TextStyle(color: Colors.white),
-                        )),
-                    SizedBox(
-                      height: 20,
-                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Forgot Your Password?',
+                          'Username',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
                         )
                       ],
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      child: TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 15),
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black26,
+                              ),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                            label: Text('Enter your username'),
+                            hintStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black26),
+                            labelStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black26),
+                          ),
+                          textInputAction: TextInputAction.next,
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black)),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                     Center(
                       child: Button(
-                          widthFactor: 0.7,
-                          heightFactor: 0.05,
+                          widthFactor: 0.4,
+                          heightFactor: 0.052,
                           onPressed: () {
+                            Get.toNamed(AppRoutes.home.toName);
                             FocusScope.of(context).unfocus();
                           },
-                          child: Text("Login",
+                          child: Text("LOGIN",
                               style: TextStyle(
                                   fontSize: 18,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600))),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.45),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Don't have an account yet?",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w700),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // Get.toNamed(AppRoutes.Register.toName);
-                          },
-                          child: Text(
-                            ' Sign Up',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: AppTheme.buttonColor,
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),

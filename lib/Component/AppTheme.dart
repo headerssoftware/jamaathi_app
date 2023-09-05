@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 
 class AppTheme {
   static const Color buttonColor = Color(0xFF0a9a43);
+  static const Color liteGreenColor = Color(0xFFc4f1dd);
+  static const Color appBarColor = Color(0xFF075325);
+  static const Color iconColor = Color(0xFF003231);
+  static const Color iconColo = Color(0xFFebad7e);
 }
 
 class Pages {
