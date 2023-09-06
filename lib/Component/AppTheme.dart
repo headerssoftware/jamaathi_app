@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppTheme {
-  static const Color buttonColor = Color(0xFF0a9a43);
-  static const Color liteGreenColor = Color(0xFFc4f1dd);
-  static const Color appBarColor = Color(0xFF075325);
-  static const Color iconColor = Color(0xFF003231);
-  static const Color iconColo = Color(0xFFebad7e);
+  static const Color liteGreenColor = Color(0xFFE0F7EE);
+  static const Color appColor = Color(0xFF003230);
+  static const Color greenColor = Color(0xFF008000);
+  static const Color backColor = Color(0xFFC8D6DD);
+  static const Color redColor = Color(0xFF9A2121);
+  static const Color textColor = Color(0xFF101010);
 }
 
 class Pages {

@@ -16,13 +16,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color(0xFF075325),
+      statusBarColor: Color(0xFF003230),
       statusBarIconBrightness: Brightness.light,
     ));
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
       home: LoginScreen(),
+      theme: ThemeData(
+        textTheme: TextTheme(
+          headline1: TextStyle(
+            fontFamily: 'Gilroy',
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       initialRoute: AppRoutes.root.toName,
       getPages: AppPages.list,
     );

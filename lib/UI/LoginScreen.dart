@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jamaathi/Component/AppTheme.dart';
 import 'package:jamaathi/Controller/LoginController.dart';
 import 'package:jamaathi/routes/AppRoutes.dart';
 import '../Component/forms.dart';
@@ -16,7 +17,7 @@ class LoginScreen extends GetView<LoginController> {
       builder: (controller) {
         return SafeArea(
           child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: AppTheme.liteGreenColor,
             appBar: PreferredSize(
               preferredSize:
                   Size(100, 70), // Set the desired height for the AppBar
@@ -32,7 +33,7 @@ class LoginScreen extends GetView<LoginController> {
                 flexibleSpace: Container(
                   height: 70,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppTheme.liteGreenColor,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(0.0),
@@ -58,7 +59,7 @@ class LoginScreen extends GetView<LoginController> {
                     ],
                   ),
                 ),
-                backgroundColor: Colors.transparent,
+                backgroundColor: AppTheme.liteGreenColor,
               ),
             ),
             body: SingleChildScrollView(
@@ -71,25 +72,30 @@ class LoginScreen extends GetView<LoginController> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Username',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        )
-                      ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'USERNAME',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )
+                        ],
+                      ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                     Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 20,
                       ),
                       child: TextFormField(
                           decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            filled: true,
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 15),
                             border: OutlineInputBorder(),
@@ -103,7 +109,7 @@ class LoginScreen extends GetView<LoginController> {
                               borderSide: BorderSide(),
                               borderRadius: BorderRadius.circular(0),
                             ),
-                            label: Text('Enter your username'),
+                            label: Text('Enter your name '),
                             hintStyle: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
@@ -130,9 +136,9 @@ class LoginScreen extends GetView<LoginController> {
                           },
                           child: Text("LOGIN",
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 17,
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w600))),
+                                  fontWeight: FontWeight.bold))),
                     ),
                   ],
                 ),

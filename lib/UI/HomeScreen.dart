@@ -6,40 +6,28 @@ import 'package:jamaathi/routes/AppRoutes.dart';
 
 class HomeScreen extends GetView<HomeScreenController> {
   const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     HomeScreenController homeController = Get.put(HomeScreenController());
     return GetBuilder<HomeScreenController>(
       init: HomeScreenController(),
       builder: (controller) {
         return SafeArea(
           child: Scaffold(
+            backgroundColor: AppTheme.liteGreenColor,
             appBar: PreferredSize(
-              preferredSize:
-                  Size(100, 70), // Set the desired height for the AppBar
+              preferredSize: Size(100, 70),
               child: AppBar(
                 automaticallyImplyLeading: false,
-                leading: InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 23,
-                        ),
-                        Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                        ),
-                      ],
-                    )),
                 bottomOpacity: 0.0,
                 elevation: 0.0,
                 flexibleSpace: Container(
                   height: 70,
                   decoration: BoxDecoration(
-                    color: Colors.black12,
+                    color: AppTheme.appColor,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(0.0),
@@ -54,13 +42,48 @@ class HomeScreen extends GetView<HomeScreenController> {
                     // ],
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: 60,
+                      Container(
+                        child: InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 23,
+                                ),
+                                Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.white,
+                                ),
+                              ],
+                            )),
                       ),
-                      Image(
-                        image: AssetImage('assets/images/logo.png'),
-                        height: 90.0,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.25,
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image(
+                              image: AssetImage('assets/images/logo.png'),
+                              height: 90.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Text(
+                                'Welcome Ini!',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -78,23 +101,11 @@ class HomeScreen extends GetView<HomeScreenController> {
                       height: 20,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Welcome',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           'Prayers',
                           style: TextStyle(
@@ -112,27 +123,95 @@ class HomeScreen extends GetView<HomeScreenController> {
                       onTap: () {
                         Get.toNamed(AppRoutes.listMosques.toName);
                       },
+                      child: Card(
+                        color: AppTheme.liteGreenColor,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: AppTheme.liteGreenColor,
+                            ),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 25,
+                            ),
+                            Image.asset(
+                              'assets/images/mosque.png',
+                              fit: BoxFit.contain,
+                              width: width * 0.1,
+                              height: height * 0.1,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Mosques",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Card(
+                      color: AppTheme.liteGreenColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
                       child: Row(
                         children: [
-                          Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: AppTheme.liteGreenColor),
-                              child: Stack(
-                                children: <Widget>[
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.mosque_sharp,
-                                          color: AppTheme.iconColor,
-                                          size: 40,
-                                        ),
-                                      )),
-                                ],
-                              )),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          Image.asset(
+                            'assets/images/prayerTimes.png',
+                            fit: BoxFit.contain,
+                            width: width * 0.1,
+                            height: height * 0.1,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Prayer Times",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Card(
+                      color: AppTheme.liteGreenColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 25,
+                          ),
+                          Image.asset(
+                            'assets/images/quran.png',
+                            fit: BoxFit.contain,
+                            width: width * 0.1,
+                            height: height * 0.1,
+                          ),
                           SizedBox(
                             width: 20,
                           ),
@@ -141,7 +220,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                               Row(
                                 children: [
                                   Text(
-                                    "Mosques",
+                                    "Quran",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
@@ -157,222 +236,119 @@ class HomeScreen extends GetView<HomeScreenController> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: [
-                        Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: AppTheme.liteGreenColor),
-                            child: Stack(
-                              children: <Widget>[
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(4.0),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.access_time_sharp,
-                                        color: AppTheme.iconColor,
-                                        size: 40,
-                                      ),
-                                    )),
-                              ],
-                            )),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Prayer Times",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                    Card(
+                      color: AppTheme.liteGreenColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Image.asset(
+                            'assets/images/tasbih.png',
+                            fit: BoxFit.contain,
+                            width: width * 0.1,
+                            height: height * 0.1,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Tasbih",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: [
-                        Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: AppTheme.liteGreenColor),
-                            child: Stack(
-                              children: <Widget>[
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(4.0),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.menu_book,
-                                        color: AppTheme.iconColor,
-                                        size: 40,
-                                      ),
-                                    )),
-                              ],
-                            )),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Quran",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                    Card(
+                      color: AppTheme.liteGreenColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Image.asset(
+                            'assets/images/qibla.png',
+                            fit: BoxFit.contain,
+                            width: width * 0.1,
+                            height: height * 0.1,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Qibla",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: [
-                        Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: AppTheme.liteGreenColor),
-                            child: Stack(
-                              children: <Widget>[
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(4.0),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.quora,
-                                        color: AppTheme.iconColor,
-                                        size: 40,
-                                      ),
-                                    )),
-                              ],
-                            )),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Tasbih",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: AppTheme.liteGreenColor),
-                            child: Stack(
-                              children: <Widget>[
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(4.0),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.quora,
-                                        color: AppTheme.iconColor,
-                                        size: 40,
-                                      ),
-                                    )),
-                              ],
-                            )),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Qibla",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: AppTheme.liteGreenColor),
-                            child: Stack(
-                              children: <Widget>[
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(4.0),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.waving_hand,
-                                        color: AppTheme.iconColor,
-                                        size: 40,
-                                      ),
-                                    )),
-                              ],
-                            )),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Duas",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                    Card(
+                      color: AppTheme.liteGreenColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Image.asset(
+                            'assets/images/duas.png',
+                            fit: BoxFit.contain,
+                            width: width * 0.1,
+                            height: height * 0.1,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Duas",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 20,
