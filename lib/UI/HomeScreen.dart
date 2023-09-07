@@ -32,14 +32,6 @@ class HomeScreen extends GetView<HomeScreenController> {
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(0.0),
                     ),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.grey.withOpacity(0.5),
-                    //     spreadRadius: 2.0,
-                    //     blurRadius: 1.0,
-                    //     offset: Offset(0, 2), // Set the elevation values
-                    //   ),
-                    // ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,31 +41,41 @@ class HomeScreen extends GetView<HomeScreenController> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 23,
-                                ),
-                                Icon(
-                                  Icons.arrow_back,
-                                  color: Colors.white,
-                                ),
-                              ],
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 23,
+                                  ),
+                                  Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
                             )),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.25,
+                        width: MediaQuery.of(context).size.width * 0.20,
                       ),
                       Expanded(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Image(
-                              image: AssetImage('assets/images/logo.png'),
-                              height: 90.0,
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.30,
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Image(
+                                image: AssetImage('assets/images/logo.png'),
+                                fit: BoxFit.cover,
+                                // width: width * 0.2,
+                                // height: height * 0.9,
+                              ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(right: 20),
+                              padding: EdgeInsets.only(right: 20),
                               child: Text(
                                 'Welcome Ini!',
                                 style: TextStyle(
@@ -109,7 +111,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                         Text(
                           'Prayers',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
@@ -124,6 +126,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                         Get.toNamed(AppRoutes.listMosques.toName);
                       },
                       child: Card(
+                        elevation: 3,
                         color: AppTheme.liteGreenColor,
                         shape: RoundedRectangleBorder(
                             side: BorderSide(
@@ -151,7 +154,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 16),
+                                      fontSize: 13),
                                 ),
                               ],
                             ),
@@ -160,12 +163,14 @@ class HomeScreen extends GetView<HomeScreenController> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Card(
+                      elevation: 3,
                       color: AppTheme.liteGreenColor,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Row(
                         children: [
                           SizedBox(
@@ -187,7 +192,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 16),
+                                    fontSize: 13),
                               ),
                             ],
                           ),
@@ -195,9 +200,10 @@ class HomeScreen extends GetView<HomeScreenController> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Card(
+                      elevation: 3,
                       color: AppTheme.liteGreenColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -224,7 +230,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 16),
+                                        fontSize: 13),
                                   ),
                                 ],
                               ),
@@ -234,9 +240,10 @@ class HomeScreen extends GetView<HomeScreenController> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Card(
+                      elevation: 3,
                       color: AppTheme.liteGreenColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -263,7 +270,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 16),
+                                        fontSize: 13),
                                   ),
                                 ],
                               ),
@@ -273,9 +280,10 @@ class HomeScreen extends GetView<HomeScreenController> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Card(
+                      elevation: 3,
                       color: AppTheme.liteGreenColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -302,7 +310,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 16),
+                                        fontSize: 13),
                                   ),
                                 ],
                               ),
@@ -312,9 +320,10 @@ class HomeScreen extends GetView<HomeScreenController> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Card(
+                      elevation: 3,
                       color: AppTheme.liteGreenColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -341,7 +350,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 16),
+                                        fontSize: 13),
                                   ),
                                 ],
                               ),
@@ -349,9 +358,6 @@ class HomeScreen extends GetView<HomeScreenController> {
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
                     ),
                   ],
                 ),

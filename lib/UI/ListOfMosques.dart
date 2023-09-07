@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:jamaathi/Component/AppTheme.dart';
 import 'package:jamaathi/Controller/ListOfMosquesController.dart';
@@ -19,25 +20,9 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
           child: Scaffold(
             backgroundColor: AppTheme.liteGreenColor,
             appBar: PreferredSize(
-              preferredSize:
-                  Size(100, 70), // Set the desired height for the AppBar
+              preferredSize: Size(100, 70),
               child: AppBar(
                 automaticallyImplyLeading: false,
-                leading: InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 23,
-                        ),
-                        Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
                 bottomOpacity: 0.0,
                 elevation: 0.0,
                 flexibleSpace: Container(
@@ -48,23 +33,60 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(0.0),
                     ),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.grey.withOpacity(0.5),
-                    //     spreadRadius: 2.0,
-                    //     blurRadius: 1.0,
-                    //     offset: Offset(0, 2), // Set the elevation values
-                    //   ),
-                    // ],
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: 60,
+                      Container(
+                        child: InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 23,
+                                  ),
+                                  Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            )),
                       ),
-                      Image(
-                        image: AssetImage('assets/images/logo.png'),
-                        height: 90.0,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.20,
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.30,
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Image(
+                                image: AssetImage('assets/images/logo.png'),
+                                fit: BoxFit.cover,
+                                // width: width * 0.2,
+                                // height: height * 0.9,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Text(
+                                'List of Mosques',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -82,25 +104,26 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'List Of Mosques',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       'List Of Mosques',
+                    //       style: TextStyle(
+                    //           fontSize: 16,
+                    //           fontWeight: FontWeight.bold,
+                    //           color: Colors.black),
+                    //     )
+                    //   ],
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Card(
+                          elevation: 2,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -155,7 +178,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                             " Nerkundram, Chennai- 600 109",
                                             style: TextStyle(
                                                 fontSize: 15,
-                                                fontWeight: FontWeight.w500)),
+                                                fontWeight: FontWeight.w400)),
                                       ],
                                     ),
                                   ],
@@ -165,154 +188,248 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              'AZAAN',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'IQAAMATH',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
+                          height: MediaQuery.of(context).size.height * 0.03,
                         ),
                         Row(
                           children: [
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.8,
-                              width: MediaQuery.of(context).size.width * 0.2,
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: controller.listOfMosques.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.30,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.2,
+                                  child: ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: controller.listOfMosques.length,
+                                    itemBuilder: (context, index) {
+                                      return Column(
                                         children: [
-                                          Text(
-                                            controller
-                                                .listOfMosques[index].name,
-                                            style: TextStyle(
-                                              color: AppTheme.textColor,
-                                              fontSize: 14,
-                                            ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                controller
+                                                    .listOfMosques[index].name,
+                                                style: TextStyle(
+                                                  color: AppTheme.textColor,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                controller
+                                                    .listOfMosques[index].time,
+                                                style: TextStyle(
+                                                  color: AppTheme.textColor,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 20,
                                           ),
                                         ],
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            controller
-                                                .listOfMosques[index].time,
-                                            style: TextStyle(
-                                              color: AppTheme.textColor,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                             SizedBox(
                               width: 25,
                             ),
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.8,
-                              width: MediaQuery.of(context).size.width * 0.2,
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: 5,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Container(
-                                        height: height * 0.04,
-                                        width: width * 0.2,
-                                        decoration: BoxDecoration(
-                                            color: AppTheme.redColor,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Center(
-                                          child: Text(
-                                            '05:10',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 14,
+                            Column(
+                              children: [
+                                Text(
+                                  'AZAAN',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.30,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.2,
+                                  child: ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount:
+                                        controller.listOfAzaanTime.length,
+                                    itemBuilder: (context, index) {
+                                      return Column(
+                                        children: [
+                                          Container(
+                                            height: height * 0.04,
+                                            width: width * 0.2,
+                                            decoration: BoxDecoration(
+                                                color: AppTheme.redColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: Center(
+                                              child: Text(
+                                                controller
+                                                    .listOfAzaanTime[index]
+                                                    .time,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                             SizedBox(
                               width: 20,
                             ),
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.8,
-                              width: MediaQuery.of(context).size.width * 0.2,
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: 5,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Container(
-                                        height: height * 0.04,
-                                        width: width * 0.2,
-                                        decoration: BoxDecoration(
-                                            color: AppTheme.greenColor,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Center(
-                                          child: Text(
-                                            '05:10',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 14,
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'IQAAMATH',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.30,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.2,
+                                  child: ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount:
+                                        controller.listOfIqaamathTime.length,
+                                    itemBuilder: (context, index) {
+                                      return Column(
+                                        children: [
+                                          Container(
+                                            height: height * 0.04,
+                                            width: width * 0.2,
+                                            decoration: BoxDecoration(
+                                                color: AppTheme.greenColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Center(
+                                                  child: Text(
+                                                    controller
+                                                        .listOfIqaamathTime[
+                                                            index]
+                                                        .time,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                                // Text(
+                                //   'IQAAMATH',
+                                //   style: TextStyle(
+                                //       color: Colors.black,
+                                //       fontSize: 12,
+                                //       fontWeight: FontWeight.bold),
+                                // ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.30,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.1,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      FloatingActionButton(
+                                        onPressed: () {},
+                                        child: Icon(
+                                          Icons.notifications_active,
+                                          color: Colors.white,
                                         ),
+                                        backgroundColor: AppTheme.appColor,
                                       ),
-                                      SizedBox(
-                                        height: 20,
+                                      FloatingActionButton(
+                                        onPressed: () {},
+                                        child: Center(
+                                          child: SvgPicture.asset(
+                                            'assets/images/location-arrow-svgrepo-com(2).svg',
+                                            height: 30,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        backgroundColor: AppTheme.appColor,
                                       ),
                                     ],
-                                  );
-                                },
-                              ),
+                                  ),
+                                ),
+                              ],
                             ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 05,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              'Lasted updated 1 hr ago',
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+                                color: Colors.black,
+                              ),
+                            )
                           ],
                         )
                       ],

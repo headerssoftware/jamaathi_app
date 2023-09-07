@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +9,9 @@ import 'package:jamaathi/routes/AppPages.dart';
 import 'package:jamaathi/routes/AppRoutes.dart';
 
 void main() {
+  final context = SecurityContext.defaultContext;
+  context.allowLegacyUnsafeRenegotiation = true;
+  final httpClient = HttpClient(context: context);
   runApp(const MyApp());
 }
 

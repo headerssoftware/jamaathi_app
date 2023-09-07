@@ -14,7 +14,7 @@ class LoginScreen extends GetView<LoginController> {
     LoginController loginController = Get.put(LoginController());
     return GetBuilder<LoginController>(
       init: LoginController(),
-      builder: (controller) {
+      builder: (_) {
         return SafeArea(
           child: Scaffold(
             backgroundColor: AppTheme.liteGreenColor,
@@ -38,23 +38,19 @@ class LoginScreen extends GetView<LoginController> {
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(0.0),
                     ),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.grey.withOpacity(0.5),
-                    //     spreadRadius: 2.0,
-                    //     blurRadius: 1.0,
-                    //     offset: Offset(0, 2), // Set the elevation values
-                    //   ),
-                    // ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image(
-                        image: AssetImage(
-                          'assets/images/logo.png',
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.30,
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        child: Image(
+                          image: AssetImage('assets/images/logo.png'),
+                          fit: BoxFit.cover,
+                          // width: width * 0.2,
+                          // height: height * 0.9,
                         ),
-                        height: 90,
                       ),
                     ],
                   ),
@@ -70,7 +66,7 @@ class LoginScreen extends GetView<LoginController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 20,
+                      height: MediaQuery.of(context).size.height * 0.03,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
@@ -93,6 +89,7 @@ class LoginScreen extends GetView<LoginController> {
                         horizontal: 20,
                       ),
                       child: TextFormField(
+                          controller: controller.usernameController,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -131,7 +128,7 @@ class LoginScreen extends GetView<LoginController> {
                           widthFactor: 0.4,
                           heightFactor: 0.052,
                           onPressed: () {
-                            Get.toNamed(AppRoutes.home.toName);
+                            controller.loginApiCall();
                             FocusScope.of(context).unfocus();
                           },
                           child: Text("LOGIN",
