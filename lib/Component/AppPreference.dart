@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:get_storage/get_storage.dart';
 
 class AppPreference {
@@ -13,15 +15,15 @@ class AppPreference {
     await _storage.initStorage;
   }
 
-  updateUserId(String userId) {
+  updateUserId(int userId) {
     _storage.write(_userId, userId);
   }
 
-  String get getUserId {
+  int get getUserId {
     try {
       return _storage.read(_userId);
     } catch (e) {
-      return "";
+      return 0;
     }
   }
 

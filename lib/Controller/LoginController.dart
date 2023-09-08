@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -5,17 +8,39 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:intl/intl.dart';
 import 'package:jamaathi/Api%20Connect/ApiConnect.dart';
 import 'package:jamaathi/Component/AppPreference.dart';
 import 'package:jamaathi/routes/AppRoutes.dart';
 
 class LoginController extends GetxController {
+  final deviceInfo = DeviceInfoPlugin();
+  RxBool isVisible = false.obs;
+  RxString osVersion = RxString("");
+  RxString formattedDateTime = RxString("");
+  String token = "";
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  Future<void> retrieveFCMToken() async {
+    token = (await messaging.getToken())!;
+    print("FCM Token: $token");
+  }
+
+  Future<String> getCurrentTime() async {
+    final now = DateTime.now();
+    var dateFormatted = DateFormat("yyyy-MM-ddTHH:mm:ss.SSS'Z'").format(now);
+    print('object:$dateFormatted');
+    formattedDateTime.value = dateFormatted;
+    return dateFormatted;
+  }
+
   @override
   void onInit() async {
     super.onInit();
+    version();
+    getCurrentTime();
+    retrieveFCMToken();
   }
-
-  RxBool isVisible = false.obs;
 
   void toggleVisibility() {
     isVisible.value = !isVisible.value;
@@ -44,12 +69,11 @@ class LoginController extends GetxController {
       Map<String, dynamic> payload = {
         "userId": 0,
         "userName": usernameController.value.text.toString(),
-        "userFcmId": "string",
-        "userLastLogin": "2023-09-07T10:36:51.709Z",
-        "osTypeId": 1,
-        "osVersion": "string"
+        "userFcmId": token,
+        "userLastLogin": formattedDateTime.value,
+        "osTypeId": Platform.isIOS ? 2 : 1,
+        "osVersion": osVersion.value,
       };
-
       var response = await _connect.login(payload);
       debugPrint("loginCall: ${response.toJson()}");
       if (response.userId != null) {
@@ -61,7 +85,7 @@ class LoginController extends GetxController {
           textColor: Colors.white,
         );
         Get.toNamed(AppRoutes.home.toName);
-        // AppPreference().updateUserId(response!.userId!);
+        AppPreference().updateUserId(response.userId!);
       } else {
         if (response == false) {
           Fluttertoast.showToast(
@@ -73,8 +97,16 @@ class LoginController extends GetxController {
           );
         }
       }
-
       print(payload);
     } catch (e) {}
+  }
+
+  Future<void> version() async {
+    if (Platform.isIOS) {
+      osVersion.value = Platform.operatingSystemVersion.toString();
+    } else if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      osVersion.value = androidInfo.version.release.toString();
+    }
   }
 }

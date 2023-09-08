@@ -6,13 +6,18 @@ import 'package:jamaathi/Controller/ListOfMosquesController.dart';
 
 class ListOfMosques extends GetView<ListOfMosquesController> {
   ListOfMosques({super.key});
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     ListOfMosquesController listOfMosquesController =
         Get.put(ListOfMosquesController());
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      if (!controller.isAddCall) {
+        controller.isAddCall = true;
+        controller.getList();
+      }
+    });
     return GetBuilder<ListOfMosquesController>(
       init: ListOfMosquesController(),
       builder: (controller) {
@@ -367,13 +372,6 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                     },
                                   ),
                                 ),
-                                // Text(
-                                //   'IQAAMATH',
-                                //   style: TextStyle(
-                                //       color: Colors.black,
-                                //       fontSize: 12,
-                                //       fontWeight: FontWeight.bold),
-                                // ),
                               ],
                             ),
                             SizedBox(

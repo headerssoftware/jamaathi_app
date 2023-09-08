@@ -110,11 +110,11 @@ class LoginScreen extends GetView<LoginController> {
                             hintStyle: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.black26),
+                                color: Colors.black),
                             labelStyle: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
-                                color: Colors.black26),
+                                color: Colors.black),
                           ),
                           textInputAction: TextInputAction.next,
                           style: TextStyle(

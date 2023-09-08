@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,10 +8,12 @@ import 'package:jamaathi/UI/LoginScreen.dart';
 import 'package:jamaathi/routes/AppPages.dart';
 import 'package:jamaathi/routes/AppRoutes.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final context = SecurityContext.defaultContext;
   context.allowLegacyUnsafeRenegotiation = true;
   final httpClient = HttpClient(context: context);
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

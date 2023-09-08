@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "960622474867",
+    "project_id": "jamaathi-484c7",
+    "storage_bucket": "jamaathi-484c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960622474867:android:296f0d910292e4a3a49c06",
+        "android_client_info": {
+          "package_name": "com.example.jamaathi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960622474867-3b95l97gaut417g0rd7e31ppd9he3htn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMr0wYoaef-efbSW4yepP8KsrJYo5fJ68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960622474867-3b95l97gaut417g0rd7e31ppd9he3htn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
