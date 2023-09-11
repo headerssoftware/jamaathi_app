@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:jamaathi/Api%20Connect/ApiConnect.dart';
+import 'package:jamaathi/Api%20Connect/JsonResponse/GetMosquesList.dart';
 import 'package:jamaathi/Component/MosquesList.dart';
 
 class ListOfMosquesController extends GetxController {
@@ -14,13 +15,20 @@ class ListOfMosquesController extends GetxController {
     super.onInit();
   }
 
+  final CarouselController carouselController = CarouselController();
+
   final ApiConnect _connect = Get.put(ApiConnect());
   RxBool isLoading = RxBool(true);
   bool isAddCall = false;
+  List<GetMosquesList> data = [];
 
   getList() async {
+    isLoading.value = true;
     var response = await _connect.getMosques();
+    debugPrint("GetAPI: ${response}");
+    isLoading.value = false;
     if (response != null) {
+      data = response;
     } else {
       Fluttertoast.showToast(
         msg: '!',

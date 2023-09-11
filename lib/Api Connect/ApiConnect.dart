@@ -31,6 +31,7 @@ class ApiConnect extends GetConnect {
     var listResponse =
         await httpService.request(url: ApiUrl.mosquesList, method: Method.GET);
     if (listResponse is dio.Response) {
+      print('listResponseobject');
       if (listResponse.data == null) {
         throw Exception(AppUtility.connectivityMessage);
       }

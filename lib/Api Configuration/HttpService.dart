@@ -65,7 +65,7 @@ class HttpService {
           loadingWidget: loadingWidget());
     }
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 201 || response.statusCode == 200) {
       return response;
     } else if (response.statusCode == 400) {
       throw Exception("Bad Request");
@@ -74,7 +74,7 @@ class HttpService {
     } else if (response.statusCode == 500) {
       throw Exception("Server Error");
     } else {
-      throw Exception("Something does wen't wrong");
+      throw Exception("Something does went wrong");
     }
 
     // } on SocketException catch (e) {
