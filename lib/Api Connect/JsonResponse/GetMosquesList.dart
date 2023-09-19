@@ -8,7 +8,7 @@ class GetMosquesList {
   String? masjidLastUpdatedTime;
   String? masjidImagePath;
   String? masjidImageURL;
-  int? userId;
+  Null? userId;
   String? subscribedFlag;
   List<WaqthDetails>? waqthDetails;
 

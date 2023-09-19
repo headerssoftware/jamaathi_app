@@ -6,6 +6,7 @@ class AppPreference {
   static const STORAGE_NAME = 'Jamaathi';
 
   static const _userId = 'userId';
+  static const _username = 'userName';
 
   static const leadEvaluationStatusLabel = "feature_permission_lead_evaluation";
 
@@ -24,6 +25,18 @@ class AppPreference {
       return _storage.read(_userId);
     } catch (e) {
       return 0;
+    }
+  }
+
+  updateUserName(String userName) {
+    _storage.write(_username, userName);
+  }
+
+  String get getUserName {
+    try {
+      return _storage.read(_username);
+    } catch (e) {
+      return " ";
     }
   }
 

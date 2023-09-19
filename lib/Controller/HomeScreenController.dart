@@ -1,3 +1,4 @@
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class HomeScreenController extends GetxController {
@@ -5,4 +6,6 @@ class HomeScreenController extends GetxController {
   void onInit() async {
     super.onInit();
   }
+
+  RxBool isLoading = RxBool(false);
 }

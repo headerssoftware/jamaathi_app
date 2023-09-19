@@ -29,6 +29,13 @@
             {
               "client_id": "960622474867-3b95l97gaut417g0rd7e31ppd9he3htn.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "960622474867-49pngk7l1dbjunuakqp7oi7a2rlag61s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jamaathi"
+              }
             }
           ]
         }

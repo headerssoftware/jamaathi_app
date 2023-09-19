@@ -77,6 +77,8 @@ class LoginController extends GetxController {
       var response = await _connect.login(payload);
       debugPrint("loginCall: ${response.toJson()}");
       if (response.userId != null) {
+        AppPreference().updateUserId(response.userId!);
+        AppPreference().updateUserName(response.userName!);
         Fluttertoast.showToast(
           msg: 'Success!',
           toastLength: Toast.LENGTH_SHORT,
@@ -85,7 +87,6 @@ class LoginController extends GetxController {
           textColor: Colors.white,
         );
         Get.toNamed(AppRoutes.home.toName);
-        AppPreference().updateUserId(response.userId!);
       } else {
         if (response == false) {
           Fluttertoast.showToast(

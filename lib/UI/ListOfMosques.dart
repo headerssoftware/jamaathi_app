@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:jamaathi/Component/AppTheme.dart';
 import 'package:jamaathi/Component/widget_theme.dart';
 import 'package:jamaathi/Controller/ListOfMosquesController.dart';
@@ -75,7 +76,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                           children: [
                             Container(
                               height: MediaQuery.of(context).size.height * 0.30,
-                              width: MediaQuery.of(context).size.width * 0.3,
+                              width: MediaQuery.of(context).size.width * 0.2,
                               child: Image(
                                 image: AssetImage('assets/images/logo.png'),
                                 fit: BoxFit.cover,
@@ -104,7 +105,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
             ),
             body: Obx(
               () => controller.isLoading.value
-                  ? loadingWidget()
+                  ? Container()
                   : SingleChildScrollView(
                       child: Column(
                         children: [
@@ -117,7 +118,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                   height: 20,
                                 ),
                                 CarouselSlider.builder(
-                                  itemCount: 5,
+                                  itemCount: 1,
                                   options: CarouselOptions(
                                       enlargeCenterPage: true,
                                       autoPlay: false,
@@ -162,8 +163,9 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                     topRight:
                                                         Radius.circular(10.0),
                                                   ),
-                                                  child: Image.asset(
-                                                    'assets/images/mosquesImage.png',
+                                                  child: Image.network(
+                                                    controller.data[index]!
+                                                        .masjidImageURL!,
                                                     fit: BoxFit.cover,
                                                     height: height * 0.2,
                                                     width: width * 0.9,
@@ -174,7 +176,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                 height: MediaQuery.of(context)
                                                         .size
                                                         .height *
-                                                    0.1,
+                                                    0.13,
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width *
@@ -221,33 +223,18 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                         SizedBox(
                                                           width: 5,
                                                         ),
-                                                        Text(
-                                                          controller.data[index]
-                                                              .masjidLocation!,
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Text(
-                                                          controller.data[index]
-                                                              .masjidAddress!,
-                                                          style: TextStyle(
-                                                              fontSize: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
+                                                        Expanded(
+                                                          child: Text(
+                                                            controller
+                                                                .data[index]
+                                                                .masjidAddress!,
+                                                            style: TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                            maxLines: 2,
+                                                          ),
                                                         )
                                                       ],
                                                     ),
@@ -280,141 +267,180 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height *
-                                              0.03,
+                                              0.02,
                                         ),
-
                                         Column(
                                           children: [
                                             Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
                                               children: [
-                                                Text(
-                                                  'AZAAN',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                SizedBox(
-                                                  width: 40,
-                                                ),
-                                                Text(
-                                                  'IQAAMATH',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ],
-                                            ),
-                                            Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.4,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.9,
-                                              child: ListView.builder(
-                                                  physics:
-                                                      NeverScrollableScrollPhysics(),
-                                                  itemCount: controller
-                                                      .data[index]
-                                                      .waqthDetails!
-                                                      .length!,
-                                                  itemBuilder:
-                                                      (context, index1) {
-                                                    return Container(
-                                                      child: Column(
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 20,
-                                                          ),
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
+                                                Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.4,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.78,
+                                                  child: ListView.builder(
+                                                      physics:
+                                                          NeverScrollableScrollPhysics(),
+                                                      itemCount: controller
+                                                          .data[index]
+                                                          .waqthDetails!
+                                                          .length!,
+                                                      itemBuilder:
+                                                          (context, index1) {
+                                                        return Container(
+                                                          child: Column(
                                                             children: [
-                                                              Column(
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        controller
-                                                                            .data[index]
-                                                                            .waqthDetails![index1]
-                                                                            .waqthName!,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              AppTheme.textColor,
-                                                                          fontSize:
-                                                                              14,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        controller
-                                                                            .data[index]
-                                                                            .waqthDetails![index1]
-                                                                            .startTime!,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              AppTheme.textColor,
-                                                                          fontSize:
-                                                                              12,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        controller
-                                                                            .data[index]
-                                                                            .waqthDetails![index1]
-                                                                            .endTime!,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              AppTheme.textColor,
-                                                                          fontSize:
-                                                                              12,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ],
+                                                              Visibility(
+                                                                visible:
+                                                                    index1 == 0,
+                                                                child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
+                                                                              .only(
+                                                                          left:
+                                                                              100),
+                                                                      child: Container(
+                                                                          width: MediaQuery.of(context).size.width * 0.5,
+                                                                          child: Row(
+                                                                            children: [
+                                                                              Text(
+                                                                                'AZAAN',
+                                                                                style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: MediaQuery.of(context).size.width * 0.13,
+                                                                              ),
+                                                                              Text(
+                                                                                'IQAAMATH',
+                                                                                style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
+                                                                              ),
+                                                                            ],
+                                                                          )),
+                                                                    ),
+                                                                  ],
+                                                                ),
                                                               ),
                                                               SizedBox(
-                                                                width: 30,
+                                                                height: 20,
                                                               ),
-                                                              Column(
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
                                                                 children: [
+                                                                  Column(
+                                                                    children: [
+                                                                      Container(
+                                                                        width: MediaQuery.of(context).size.width *
+                                                                            0.17,
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              controller.data[index].waqthDetails![index1].waqthName!,
+                                                                              style: TextStyle(
+                                                                                color: AppTheme.textColor,
+                                                                                fontSize: 14,
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(
+                                                                        height:
+                                                                            5,
+                                                                      ),
+                                                                      Row(
+                                                                        children: [
+                                                                          Text(
+                                                                            controller.Time(controller.data[index].waqthDetails![index1].startTime!),
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: AppTheme.textColor,
+                                                                              fontSize: 12,
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                4,
+                                                                          ),
+                                                                          Text(
+                                                                            controller.Time(controller.data[index].waqthDetails![index1].endTime!),
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: AppTheme.textColor,
+                                                                              fontSize: 12,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 30,
+                                                                  ),
+                                                                  Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Container(
+                                                                        height: height *
+                                                                            0.04,
+                                                                        width: width *
+                                                                            0.2,
+                                                                        decoration: BoxDecoration(
+                                                                            color:
+                                                                                AppTheme.redColor,
+                                                                            borderRadius: BorderRadius.circular(20)),
+                                                                        child:
+                                                                            Center(
+                                                                          child:
+                                                                              Text(
+                                                                            controller.Time(controller.data[index].waqthDetails![index1].azanTime!),
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontSize: 14,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 20,
+                                                                  ),
                                                                   Container(
                                                                     height:
                                                                         height *
                                                                             0.04,
                                                                     width:
                                                                         width *
-                                                                            0.2,
+                                                                            0.19,
                                                                     decoration: BoxDecoration(
                                                                         color: AppTheme
-                                                                            .redColor,
+                                                                            .greenColor,
                                                                         borderRadius:
                                                                             BorderRadius.circular(20)),
                                                                     child:
                                                                         Center(
                                                                       child:
                                                                           Text(
-                                                                        controller
+                                                                        controller.Time(controller
                                                                             .data[index]
                                                                             .waqthDetails![index1]
-                                                                            .azanTime!,
+                                                                            .iqaamathTime!),
                                                                         style:
                                                                             TextStyle(
                                                                           color:
@@ -425,77 +451,101 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
-                                                              SizedBox(
-                                                                width: 20,
-                                                              ),
-                                                              Container(
-                                                                height: height *
-                                                                    0.04,
-                                                                width: width *
-                                                                    0.19,
-                                                                decoration: BoxDecoration(
-                                                                    color: AppTheme
-                                                                        .greenColor,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            20)),
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    controller
-                                                                        .data[
-                                                                            index]
-                                                                        .waqthDetails![
-                                                                            index1]
-                                                                        .iqaamathTime!,
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          14,
-                                                                    ),
+                                                                  SizedBox(
+                                                                    width: 0,
                                                                   ),
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 0,
+                                                                ],
                                                               ),
                                                             ],
                                                           ),
-                                                        ],
+                                                        );
+                                                      }),
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Container(
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.05,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.07,
+                                                      child:
+                                                          FloatingActionButton(
+                                                        onPressed: () {},
+                                                        child: Icon(
+                                                            Icons
+                                                                .notifications_active,
+                                                            size: 20),
+                                                        backgroundColor: AppTheme
+                                                            .appColor, // You can customize the background color
                                                       ),
-                                                    );
-                                                  }),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 15,
+                                                    ),
+                                                    Container(
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.05,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.07,
+                                                      child:
+                                                          FloatingActionButton(
+                                                        onPressed: () {},
+                                                        child: SvgPicture.asset(
+                                                          'assets/images/location-arrow-svgrepo-com(2).svg',
+                                                          fit: BoxFit.contain,
+                                                          width: width * 0.1,
+                                                          height: height * 0.15,
+                                                        ),
+                                                        backgroundColor:
+                                                            AppTheme.appColor,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.22,
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
-
-                                        // SizedBox(
-                                        //   height: 05,
-                                        // ),
-                                        // Row(
-                                        //   mainAxisAlignment: MainAxisAlignment.end,
-                                        //   children: [
-                                        //     Text(
-                                        //       'Lasted updated 1 hr ago',
-                                        //       style: TextStyle(
-                                        //         fontStyle: FontStyle.italic,
-                                        //         fontWeight: FontWeight.w400,
-                                        //         fontSize: 12,
-                                        //         color: Colors.black,
-                                        //       ),
-                                        //     )
-                                        //   ],
-                                        // )
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              controller.data[index]!
+                                                  .masjidLastUpdatedTime!,
+                                              style: TextStyle(
+                                                fontStyle: FontStyle.italic,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 12,
+                                                color: Colors.black,
+                                              ),
+                                            )
+                                          ],
+                                        )
                                       ],
                                     );
-
-                                    // Image.network(
-                                    //  '',
-                                    //  // controller.listOfImages[index],
-                                    //  fit: BoxFit.cover,
                                   },
                                 ),
                               ],
