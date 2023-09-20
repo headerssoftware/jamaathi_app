@@ -118,7 +118,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                   height: 20,
                                 ),
                                 CarouselSlider.builder(
-                                  itemCount: 1,
+                                  itemCount: controller.data!.length!,
                                   options: CarouselOptions(
                                       enlargeCenterPage: true,
                                       autoPlay: false,
@@ -466,26 +466,45 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                     SizedBox(
                                                       height: 10,
                                                     ),
-                                                    Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.05,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.07,
-                                                      child:
-                                                          FloatingActionButton(
-                                                        onPressed: () {},
-                                                        child: Icon(
-                                                            Icons
-                                                                .notifications_active,
-                                                            size: 20),
-                                                        backgroundColor: AppTheme
-                                                            .appColor, // You can customize the background color
+                                                    Obx(
+                                                      () => Container(
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.06,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.08,
+                                                        child:
+                                                            FloatingActionButton(
+                                                          onPressed: () {
+                                                            controller
+                                                                .subscribed();
+                                                            controller
+                                                                .deleteCall(
+                                                              controller
+                                                                  .data[index]!
+                                                                  .masjidId!,
+                                                            );
+                                                            listOfMosquesController
+                                                                .toggleVisibility();
+                                                          },
+                                                          child: Icon(
+                                                              color:
+                                                                  Colors.white,
+                                                              listOfMosquesController
+                                                                      .isVisible
+                                                                      .value
+                                                                  ? Icons
+                                                                      .notifications_active
+                                                                  : Icons
+                                                                      .notifications),
+                                                          backgroundColor: AppTheme
+                                                              .appColor, // You can customize the background color
+                                                        ),
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -496,12 +515,12 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                           MediaQuery.of(context)
                                                                   .size
                                                                   .height *
-                                                              0.05,
+                                                              0.06,
                                                       width:
                                                           MediaQuery.of(context)
                                                                   .size
                                                                   .width *
-                                                              0.07,
+                                                              0.08,
                                                       child:
                                                           FloatingActionButton(
                                                         onPressed: () {},
@@ -533,8 +552,9 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Text(
-                                              controller.data[index]!
-                                                  .masjidLastUpdatedTime!,
+                                              '',
+                                              // controller.data[index]!
+                                              //     .masjidLastUpdatedTime!,
                                               style: TextStyle(
                                                 fontStyle: FontStyle.italic,
                                                 fontWeight: FontWeight.w400,
