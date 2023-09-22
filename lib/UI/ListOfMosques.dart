@@ -2,10 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:jamaathi/Component/AppTheme.dart';
-import 'package:jamaathi/Component/widget_theme.dart';
 import 'package:jamaathi/Controller/ListOfMosquesController.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListOfMosques extends GetView<ListOfMosquesController> {
   ListOfMosques({super.key});
@@ -22,6 +21,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
         controller.getList();
       }
     });
+
     return GetBuilder<ListOfMosquesController>(
       init: ListOfMosquesController(),
       builder: (controller) {
@@ -523,7 +523,31 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                               0.08,
                                                       child:
                                                           FloatingActionButton(
-                                                        onPressed: () {},
+                                                        onPressed: () {
+                                                          final loc = controller
+                                                              .data[index]!
+                                                              .masjidLocation!;
+                                                          final split =
+                                                              loc.split(',');
+                                                          final Map<int, String>
+                                                              values = {
+                                                            for (int i = 0;
+                                                                i <
+                                                                    split
+                                                                        .length;
+                                                                i++)
+                                                              i: split[i]
+                                                          };
+                                                          controller.latitude =
+                                                              values[0]!;
+                                                          controller.longitude =
+                                                              values[1]!;
+
+                                                          print(
+                                                              'LOCATIONDATA$values');
+
+                                                          controller.openMap();
+                                                        },
                                                         child: SvgPicture.asset(
                                                           'assets/images/location-arrow-svgrepo-com(2).svg',
                                                           fit: BoxFit.contain,

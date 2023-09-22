@@ -11,8 +11,18 @@ import 'package:jamaathi/Api%20Connect/ApiConnect.dart';
 import 'package:jamaathi/Api%20Connect/JsonResponse/GetMosquesList.dart';
 import 'package:jamaathi/Component/AppPreference.dart';
 import 'package:jamaathi/Component/MosquesList.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListOfMosquesController extends GetxController {
+  final CarouselController carouselController = CarouselController();
+  final ApiConnect _connect = Get.put(ApiConnect());
+  RxBool isLoading = RxBool(true);
+  String latitude = "";
+  String longitude = "";
+  bool isAddCall = false;
+  List<GetMosquesList> data = [];
+  RxBool isVisible = false.obs;
+
   @override
   void onInit() async {
     super.onInit();
@@ -20,20 +30,12 @@ class ListOfMosquesController extends GetxController {
 
   String Time(String time) {
     DateTime dateTime = DateFormat("HH:mm:ss").parse(time);
-
     // Format the DateTime object as "hh:mm" (12-hour format)
     String formattedTime = DateFormat("hh:mm").format(dateTime);
     print('FormattedDateandTime: $formattedTime');
 
     return formattedTime;
   }
-
-  final CarouselController carouselController = CarouselController();
-  final ApiConnect _connect = Get.put(ApiConnect());
-  RxBool isLoading = RxBool(true);
-  bool isAddCall = false;
-  List<GetMosquesList> data = [];
-  RxBool isVisible = false.obs;
 
   void toggleVisibility() {
     isVisible.value = !isVisible.value;
@@ -55,6 +57,18 @@ class ListOfMosquesController extends GetxController {
         backgroundColor: Colors.redAccent,
         textColor: Colors.white,
       );
+    }
+  }
+
+  Future<void> openMap() async {
+    print('object');
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=${Uri.encodeFull('$latitude,$longitude')}';
+    print('Opening map with URL: $googleUrl');
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw '';
     }
   }
 
