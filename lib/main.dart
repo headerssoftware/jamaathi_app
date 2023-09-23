@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:jamaathi/Component/AppPreference.dart';
+import 'package:jamaathi/UI/HomeScreen.dart';
 import 'package:jamaathi/UI/LoginScreen.dart';
 import 'package:jamaathi/firebase_options.dart';
 import 'package:jamaathi/routes/AppPages.dart';
@@ -52,17 +53,24 @@ class MyApp extends StatelessWidget {
     ));
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: AppPreference().getUserId == null || AppPreference().getUserId == 0
+          ? LoginScreen()
+          : HomeScreen(),
+
+      // LoginScreen(),
       theme: ThemeData(
         textTheme: TextTheme(
           headline1: TextStyle(
-            fontFamily: 'Gilroy',
+            fontFamily: '',
             fontSize: 24.0,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
-      initialRoute: AppRoutes.root.toName,
+      initialRoute:
+          AppPreference().getUserId == null || AppPreference().getUserId == 0
+              ? AppRoutes.root.toName
+              : AppRoutes.home.toName,
       getPages: AppPages.list,
     );
   }

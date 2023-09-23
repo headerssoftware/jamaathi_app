@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 import 'package:jamaathi/Api%20Configuration/ApiUrl.dart';
@@ -61,16 +63,16 @@ class ApiConnect extends GetConnect {
     return subscribedResponse();
   }
 
-  Future<dynamic> deleteApiConnect() async {
+  Future<bool> deleteApiConnect() async {
+    print('RESPONESENDsqVNEFG');
     httpService.init();
     var response = await httpService.request(
         url: ApiUrl.subscribeDelete, method: Method.DELETE);
-    if (response.statusCode == 200) {
+    print('RESPONESEND$response');
+    if (response.statusCode == 204) {
       return true;
     }
-    if (response.statusCode == 400) {
-      return false;
-    }
+    return false;
   }
 
 // Future<dynamic> deleteApiConnect(String url) async {

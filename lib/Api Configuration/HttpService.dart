@@ -59,13 +59,16 @@ class HttpService {
       response = await GetX.Get.showOverlay(
           asyncFunction: () => _dio.put(url, data: params),
           loadingWidget: loadingWidget());
+    } else if (method == Method.DELETE) {
+      response = await GetX.Get.showOverlay(
+          asyncFunction: () => _dio.delete(url),
+          loadingWidget: loadingWidget());
     } else {
       response = await GetX.Get.showOverlay(
           asyncFunction: () => _dio.get(url, queryParameters: params),
           loadingWidget: loadingWidget());
     }
-
-    if (response.statusCode == 201 || response.statusCode == 200) {
+    if (response.statusCode! > 200 || response.statusCode! < 205) {
       return response;
     } else if (response.statusCode == 400) {
       throw Exception("Bad Request");

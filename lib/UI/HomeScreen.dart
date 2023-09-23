@@ -147,7 +147,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                               },
                               child: Card(
                                 elevation: 3,
-                                color: AppTheme.liteGreenColor,
+                                color: AppTheme.cardColor,
                                 shape: RoundedRectangleBorder(
                                     side: BorderSide(
                                       color: AppTheme.liteGreenColor,
@@ -187,7 +187,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                             ),
                             Card(
                               elevation: 3,
-                              color: AppTheme.liteGreenColor,
+                              color: AppTheme.cardColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -224,7 +224,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                             ),
                             Card(
                               elevation: 3,
-                              color: AppTheme.liteGreenColor,
+                              color: AppTheme.cardColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
@@ -264,7 +264,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                             ),
                             Card(
                               elevation: 3,
-                              color: AppTheme.liteGreenColor,
+                              color: AppTheme.cardColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
@@ -304,7 +304,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                             ),
                             Card(
                               elevation: 3,
-                              color: AppTheme.liteGreenColor,
+                              color: AppTheme.cardColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
@@ -344,7 +344,7 @@ class HomeScreen extends GetView<HomeScreenController> {
                             ),
                             Card(
                               elevation: 3,
-                              color: AppTheme.liteGreenColor,
+                              color: AppTheme.cardColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(

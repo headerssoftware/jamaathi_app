@@ -10,7 +10,6 @@ import 'package:jamaathi/Api%20Configuration/ApiUrl.dart';
 import 'package:jamaathi/Api%20Connect/ApiConnect.dart';
 import 'package:jamaathi/Api%20Connect/JsonResponse/GetMosquesList.dart';
 import 'package:jamaathi/Component/AppPreference.dart';
-import 'package:jamaathi/Component/MosquesList.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ListOfMosquesController extends GetxController {
@@ -45,7 +44,6 @@ class ListOfMosquesController extends GetxController {
     isLoading.value = true;
     var response = await _connect.getMosques();
     debugPrint("fullResponces: ${response.length}");
-
     isLoading.value = false;
     if (response != null) {
       data = response;
@@ -65,11 +63,12 @@ class ListOfMosquesController extends GetxController {
     String googleUrl =
         'https://www.google.com/maps/search/?api=1&query=${Uri.encodeFull('$latitude,$longitude')}';
     print('Opening map with URL: $googleUrl');
-    if (await canLaunch(googleUrl)) {
-      await launch(googleUrl);
-    } else {
-      throw '';
-    }
+    launchUrl(Uri.parse(googleUrl)).onError(
+      (error, stackTrace) {
+        print("Url is not valid!");
+        return false;
+      },
+    );
   }
 
   subscribed() async {
@@ -81,7 +80,9 @@ class ListOfMosquesController extends GetxController {
     isLoading.value = true;
     var response = await _connect.subscribedApiConnect(payload);
     isLoading.value = false;
-    debugPrint("loginCall: ${response.toJson()}");
+    getList();
+
+    debugPrint("subscuribelAPi: ${response.toJson()}");
     if (response != null) {
       Fluttertoast.showToast(
         msg: 'Success!',
@@ -102,10 +103,14 @@ class ListOfMosquesController extends GetxController {
   }
 
   Future<void> deleteCall(int msId) async {
+    print('object');
     ApiUrl.subscribeDelete = ApiUrl.subscribeDelete + msId.toString();
-    final response = await _connect.deleteApiConnect;
+    debugPrint("DELETEAPIURL: ${ApiUrl.subscribeDelete}");
+    final response = await _connect.deleteApiConnect();
     debugPrint("deleteCall: ${response}");
-    if (response != null) {
+    getList();
+
+    if (response!) {
       Fluttertoast.showToast(
         msg: 'Success!',
         toastLength: Toast.LENGTH_SHORT,

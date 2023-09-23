@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 class AppTheme {
   static const Color liteGreenColor = Color(0xFFE0F7EE);
+  static const Color cardColor = Color(0xFFcff2f0);
   static const Color appColor = Color(0xFF003230);
   static const Color greenColor = Color(0xFF008000);
   static const Color backColor = Color(0xFFC8D6DD);
