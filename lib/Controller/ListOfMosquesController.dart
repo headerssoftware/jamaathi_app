@@ -21,6 +21,8 @@ class ListOfMosquesController extends GetxController {
   bool isAddCall = false;
   List<GetMosquesList> data = [];
   RxBool isVisible = false.obs;
+  RxInt selectedIndex = RxInt(0);
+  RxString value = RxString("");
 
   @override
   void onInit() async {
@@ -32,8 +34,21 @@ class ListOfMosquesController extends GetxController {
     // Format the DateTime object as "hh:mm" (12-hour format)
     String formattedTime = DateFormat("hh:mm").format(dateTime);
     print('FormattedDateandTime: $formattedTime');
-
     return formattedTime;
+  }
+
+  String extractTimeAndSeconds(String dateTimeString) {
+    DateTime dateTime = DateTime.parse(dateTimeString);
+    // Format the DateTime object as "hh:mm:ss" (12-hour format)
+    String formattedTime = DateFormat("hh:mm").format(dateTime);
+    return formattedTime;
+  }
+
+  String formatTimeOfDay(TimeOfDay tod) {
+    final now = new DateTime.now();
+    final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
+    final format = DateFormat.jm(); //"6:00 AM"
+    return format.format(dt);
   }
 
   void toggleVisibility() {
@@ -49,13 +64,18 @@ class ListOfMosquesController extends GetxController {
       data = response;
     } else {
       Fluttertoast.showToast(
-        msg: '!',
+        msg: '',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         backgroundColor: Colors.redAccent,
         textColor: Colors.white,
       );
     }
+  }
+
+  Future<void> refreshData() async {
+    getList();
+    return Future.delayed(Duration(seconds: 2));
   }
 
   Future<void> openMap() async {
@@ -71,26 +91,18 @@ class ListOfMosquesController extends GetxController {
     );
   }
 
-  subscribed() async {
+  subscribed(int masjidId) async {
     Map<String, dynamic> payload = {
       "userMasjidId": 0,
       "userId": AppPreference().getUserId,
-      "masjidId": 1
+      "masjidId": masjidId
     };
     isLoading.value = true;
     var response = await _connect.subscribedApiConnect(payload);
     isLoading.value = false;
     getList();
-
     debugPrint("subscuribelAPi: ${response.toJson()}");
     if (response != null) {
-      Fluttertoast.showToast(
-        msg: 'Success!',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
-      );
     } else {
       Fluttertoast.showToast(
         msg: 'Failed!',
@@ -104,20 +116,12 @@ class ListOfMosquesController extends GetxController {
 
   Future<void> deleteCall(int msId) async {
     print('object');
-    ApiUrl.subscribeDelete = ApiUrl.subscribeDelete + msId.toString();
+    String url = ApiUrl.subscribeDelete + msId.toString();
     debugPrint("DELETEAPIURL: ${ApiUrl.subscribeDelete}");
-    final response = await _connect.deleteApiConnect();
+    final response = await _connect.deleteApiConnect(url);
     debugPrint("deleteCall: ${response}");
     getList();
-
     if (response!) {
-      Fluttertoast.showToast(
-        msg: 'Success!',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
-      );
     } else {
       Fluttertoast.showToast(
         msg: 'Failed!',

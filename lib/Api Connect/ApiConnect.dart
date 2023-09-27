@@ -63,11 +63,10 @@ class ApiConnect extends GetConnect {
     return subscribedResponse();
   }
 
-  Future<bool> deleteApiConnect() async {
-    print('RESPONESENDsqVNEFG');
+  Future<bool> deleteApiConnect(String url) async {
+    print('RESPONESENDVNEFG');
     httpService.init();
-    var response = await httpService.request(
-        url: ApiUrl.subscribeDelete, method: Method.DELETE);
+    var response = await httpService.request(url: url, method: Method.DELETE);
     print('RESPONESEND$response');
     if (response.statusCode == 204) {
       return true;

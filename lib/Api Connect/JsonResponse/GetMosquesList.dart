@@ -33,7 +33,7 @@ class GetMosquesList {
     masjidAddress = json['masjidAddress'];
     masjidPincode = json['masjidPincode'];
     masjidMadhab = json['masjidMadhab'];
-    masjidLastUpdatedTime = json['masjidLastUpdatedTime'];
+    masjidLastUpdatedTime = json['masjidLastUpdatedTime'] ?? "";
     masjidImagePath = json['masjidImagePath'];
     masjidImageURL = json['masjidImageURL'];
     userId = json['userId'];
