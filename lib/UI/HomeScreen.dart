@@ -103,9 +103,10 @@ class HomeScreen extends GetView<HomeScreenController> {
                                 Text(
                                   'Welcome',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                      fontSize: 16),
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 5,
@@ -113,9 +114,11 @@ class HomeScreen extends GetView<HomeScreenController> {
                                 Text(
                                   AppPreference().getUserName,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black,
-                                      fontSize: 14),
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.greenColor,
+                                    fontStyle: FontStyle.italic,
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ],
                             ),

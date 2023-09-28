@@ -23,7 +23,7 @@ class LoginController extends GetxController {
 
   Future<void> retrieveFCMToken() async {
     token = (await messaging.getToken())!;
-    print("FCM Token: $token");
+    print("FCMToken: $token");
   }
 
   Future<String> getCurrentTime() async {

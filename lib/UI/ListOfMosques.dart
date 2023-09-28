@@ -46,7 +46,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                     ),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                         child: InkWell(
@@ -70,34 +70,21 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                             )),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.20,
+                        width: MediaQuery.of(context).size.width * 0.2,
                       ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.30,
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              child: Image(
-                                image: AssetImage('assets/images/logo.png'),
-                                fit: BoxFit.cover,
-                                // width: width * 0.2,
-                                // height: height * 0.9,
-                              ),
+                      Row(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.30,
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            child: Image(
+                              image: AssetImage('assets/images/logo.png'),
+                              fit: BoxFit.cover,
+                              // width: width * 0.2,
+                              // height: height * 0.9,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 0),
-                              child: Text(
-                                'List of Mosques',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 16),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -111,6 +98,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                   : RefreshIndicator(
                       onRefresh: controller.refreshData,
                       child: SingleChildScrollView(
+                        physics: ScrollPhysics(),
                         child: Column(
                           children: [
                             Padding(
@@ -216,10 +204,12 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                                   .data[index]!
                                                                   .masjidName!,
                                                               style: TextStyle(
-                                                                  fontSize: 15,
+                                                                  fontSize: 17,
+                                                                  color: AppTheme
+                                                                      .greenColor,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w400)),
+                                                                          .bold)),
                                                         ],
                                                       ),
                                                       Row(
@@ -323,14 +313,14 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                                                 children: [
                                                                                   Text(
                                                                                     'AZAAN',
-                                                                                    style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
+                                                                                    style: TextStyle(color: AppTheme.appColor, fontSize: 12, fontWeight: FontWeight.bold),
                                                                                   ),
                                                                                   SizedBox(
                                                                                     width: MediaQuery.of(context).size.width * 0.13,
                                                                                   ),
                                                                                   Text(
                                                                                     'IQAAMATH',
-                                                                                    style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
+                                                                                    style: TextStyle(color: AppTheme.appColor, fontSize: 12, fontWeight: FontWeight.bold),
                                                                                   ),
                                                                                 ],
                                                                               )),
@@ -350,17 +340,14 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                                         children: [
                                                                           Container(
                                                                             width:
-                                                                                MediaQuery.of(context).size.width * 0.17,
+                                                                                MediaQuery.of(context).size.width * 0.15,
                                                                             child:
                                                                                 Row(
                                                                               mainAxisAlignment: MainAxisAlignment.start,
                                                                               children: [
                                                                                 Text(
                                                                                   controller.data[index].waqthDetails![index1].waqthName!,
-                                                                                  style: TextStyle(
-                                                                                    color: AppTheme.textColor,
-                                                                                    fontSize: 14,
-                                                                                  ),
+                                                                                  style: TextStyle(color: AppTheme.appColor, fontSize: 15, fontWeight: FontWeight.w700),
                                                                                 ),
                                                                               ],
                                                                             ),
@@ -382,7 +369,14 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                                                 ),
                                                                               ),
                                                                               SizedBox(
-                                                                                width: 8,
+                                                                                width: 3,
+                                                                              ),
+                                                                              Text(
+                                                                                '-',
+                                                                                style: TextStyle(
+                                                                                  color: AppTheme.textColor,
+                                                                                  fontSize: 12,
+                                                                                ),
                                                                               ),
                                                                               Text(
                                                                                 controller.Time(controller.data[index].waqthDetails![index1].endTime!),
@@ -566,13 +560,17 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                             controller
                                                                 .openMap();
                                                           },
-                                                          child:
-                                                              SvgPicture.asset(
-                                                            'assets/images/location-arrow-svgrepo-com(2).svg',
-                                                            fit: BoxFit.contain,
-                                                            width: width * 0.1,
-                                                            height:
-                                                                height * 0.15,
+                                                          child: Center(
+                                                            child: SvgPicture
+                                                                .asset(
+                                                              'assets/images/location-arrow-svgrepo-com(2).svg',
+                                                              fit: BoxFit
+                                                                  .contain,
+                                                              width:
+                                                                  width * 0.01,
+                                                              height:
+                                                                  height * 0.15,
+                                                            ),
                                                           ),
                                                           backgroundColor:
                                                               AppTheme.appColor,
@@ -599,41 +597,37 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                 'Last update',
                                                 style: TextStyle(
                                                   fontStyle: FontStyle.italic,
-                                                  fontWeight: FontWeight.w400,
+                                                  fontWeight: FontWeight.w600,
                                                   fontSize: 12,
-                                                  color: Colors.black,
+                                                  color: AppTheme.appColor,
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: 5,
+                                                width: 2,
                                               ),
-                                              // Text(
-                                              //   controller.extractTimeAndSeconds(
-                                              //       controller.data[index]!
-                                              //               .masjidLastUpdatedTime!),
-                                              //   style: TextStyle(
-                                              //     fontStyle: FontStyle.italic,
-                                              //     fontWeight: FontWeight.w400,
-                                              //     fontSize: 12,
-                                              //     color: Colors.black,
-                                              //   ),
-                                              // ),
-
-                                              // Text(
-                                              //   controller.Time(controller
-                                              //       .data[index]
-                                              //       .masjidLastUpdatedTime!),
-                                              //
-                                              //   // controller.data[index]!
-                                              //   //     .masjidLastUpdatedTime!
-                                              //   //     .toString(),
-                                              //   style: TextStyle(
-                                              //     fontStyle: FontStyle.italic,
-                                              //     fontWeight: FontWeight.w400,
-                                              //     fontSize: 12,
-                                              //     color: Colors.black,
-                                              //   ),
-                                              // )
+                                              Text(
+                                                controller.getHours(controller
+                                                    .data[index]
+                                                    .masjidLastUpdatedTime!),
+                                                style: TextStyle(
+                                                  fontStyle: FontStyle.italic,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 12,
+                                                  color: AppTheme.appColor,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 2,
+                                              ),
+                                              Text(
+                                                'hr ago',
+                                                style: TextStyle(
+                                                  fontStyle: FontStyle.italic,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 12,
+                                                  color: AppTheme.appColor,
+                                                ),
+                                              ),
                                             ],
                                           )
                                         ],

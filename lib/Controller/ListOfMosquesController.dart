@@ -11,6 +11,7 @@ import 'package:jamaathi/Api%20Connect/ApiConnect.dart';
 import 'package:jamaathi/Api%20Connect/JsonResponse/GetMosquesList.dart';
 import 'package:jamaathi/Component/AppPreference.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/intl.dart';
 
 class ListOfMosquesController extends GetxController {
   final CarouselController carouselController = CarouselController();
@@ -37,18 +38,12 @@ class ListOfMosquesController extends GetxController {
     return formattedTime;
   }
 
-  String extractTimeAndSeconds(String dateTimeString) {
-    DateTime dateTime = DateTime.parse(dateTimeString);
-    // Format the DateTime object as "hh:mm:ss" (12-hour format)
-    String formattedTime = DateFormat("hh:mm").format(dateTime);
+  String getHours(String man) {
+    DateTime now = DateTime.now();
+    String formattedTime =
+        DateFormat("h").format(now); // 'h:mm a' for 12-hour format with AM/PM
+    print('Current Time: $formattedTime');
     return formattedTime;
-  }
-
-  String formatTimeOfDay(TimeOfDay tod) {
-    final now = new DateTime.now();
-    final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
-    final format = DateFormat.jm(); //"6:00 AM"
-    return format.format(dt);
   }
 
   void toggleVisibility() {
@@ -75,7 +70,7 @@ class ListOfMosquesController extends GetxController {
 
   Future<void> refreshData() async {
     getList();
-    return Future.delayed(Duration(seconds: 2));
+    return Future.delayed(Duration(seconds: 0));
   }
 
   Future<void> openMap() async {

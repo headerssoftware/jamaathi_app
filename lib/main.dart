@@ -15,11 +15,9 @@ import 'package:jamaathi/routes/AppRoutes.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPreference().init();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
