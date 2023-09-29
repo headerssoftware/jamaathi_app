@@ -18,7 +18,22 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    // Handle the notification when the app is in the foreground.
+    print("onMessagedata: ${message.data}");
+    print("onMessagenotification: ${message.notification}");
+    // You can access other fields as needed.
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    // Handle the notification when the user taps it and the app is in the foreground.
+    print("onMessageOpenedApp2data: ${message.data}");
+    print("onMessageOpenedApp2notification: ${message.notification}");
+    // You can access other fields as needed.
+  });
+
+  FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
     sound: true,
@@ -33,6 +48,15 @@ Future<void> main() async {
     provisional: false,
     sound: true,
   );
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FirebaseMessaging.onMessage.listen((RemoteMessage event) {
+    print("message recieved");
+    print(event.notification!.body);
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((message) {
+    print('Message clicked!');
+  });
 
   final context = SecurityContext.defaultContext;
   context.allowLegacyUnsafeRenegotiation = true;
@@ -54,8 +78,6 @@ class MyApp extends StatelessWidget {
       home: AppPreference().getUserId == null || AppPreference().getUserId == 0
           ? LoginScreen()
           : HomeScreen(),
-
-      // LoginScreen(),
       theme: ThemeData(
         textTheme: TextTheme(
           headline1: TextStyle(

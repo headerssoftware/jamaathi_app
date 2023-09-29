@@ -50,6 +50,8 @@ dependencies:
   dots_indicator: ^2.1.1
   carousel_slider: ^4.2.1
   url_launcher: ^6.1.14
+  awesome_notifications: ^0.6.19
+  firebase_analytics: ^10.5.0
 
 
 dev_dependencies:
