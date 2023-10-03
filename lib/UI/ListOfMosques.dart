@@ -210,6 +210,15 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold)),
+                                                          Text(
+                                                              '(${controller.data[index]?.masjidMadhab!})',
+                                                              style: TextStyle(
+                                                                  fontSize: 17,
+                                                                  color: AppTheme
+                                                                      .greenColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
                                                         ],
                                                       ),
                                                       Row(
@@ -473,6 +482,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                             0.08,
                                                         child:
                                                             FloatingActionButton(
+                                                          heroTag: "",
                                                           onPressed: () {
                                                             controller
                                                                 .selectedIndex
@@ -531,6 +541,7 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                                             0.08,
                                                         child:
                                                             FloatingActionButton(
+                                                          heroTag: "",
                                                           onPressed: () {
                                                             final loc = controller
                                                                 .data[index]!
@@ -593,8 +604,23 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
+                                              // Text(
+                                              //   'Last update',
+                                              //   style: TextStyle(
+                                              //     fontStyle: FontStyle.italic,
+                                              //     fontWeight: FontWeight.w600,
+                                              //     fontSize: 12,
+                                              //     color: AppTheme.appColor,
+                                              //   ),
+                                              // ),
+                                              SizedBox(
+                                                width: 2,
+                                              ),
                                               Text(
-                                                'Last update',
+                                                controller.getLastUpdateMessage(
+                                                    controller.data[index]
+                                                            .masjidLastUpdatedTime! ??
+                                                        ""),
                                                 style: TextStyle(
                                                   fontStyle: FontStyle.italic,
                                                   fontWeight: FontWeight.w600,
@@ -605,29 +631,15 @@ class ListOfMosques extends GetView<ListOfMosquesController> {
                                               SizedBox(
                                                 width: 2,
                                               ),
-                                              Text(
-                                                controller.getHours(controller
-                                                    .data[index]
-                                                    .masjidLastUpdatedTime!),
-                                                style: TextStyle(
-                                                  fontStyle: FontStyle.italic,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  color: AppTheme.appColor,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 2,
-                                              ),
-                                              Text(
-                                                'hr ago',
-                                                style: TextStyle(
-                                                  fontStyle: FontStyle.italic,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 12,
-                                                  color: AppTheme.appColor,
-                                                ),
-                                              ),
+                                              // Text(
+                                              //   'hr ago',
+                                              //   style: TextStyle(
+                                              //     fontStyle: FontStyle.italic,
+                                              //     fontWeight: FontWeight.w600,
+                                              //     fontSize: 12,
+                                              //     color: AppTheme.appColor,
+                                              //   ),
+                                              // ),
                                             ],
                                           )
                                         ],

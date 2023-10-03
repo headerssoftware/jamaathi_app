@@ -22,23 +22,47 @@ Future<void> main() async {
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     // Handle the notification when the app is in the foreground.
     print("onMessagedata: ${message.data}");
-    print("onMessagenotification: ${message.notification}");
+    // message.data is where custom notification data is typically sent.
+
     // You can access other fields as needed.
+    if (message.notification != null) {
+      print("onMessagetitle: ${message.notification}");
+      print("onMessagemessage: ${message.notification}");
+    }
   });
 
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
     // Handle the notification when the user taps it and the app is in the foreground.
-    print("onMessageOpenedApp2data: ${message.data}");
-    print("onMessageOpenedApp2notification: ${message.notification}");
+    print("onMessageOpenedApp data: ${message.data}");
+    // message.data is where custom notification data is typically sent.
+
     // You can access other fields as needed.
+    if (message.notification != null) {
+      print("onMessageOpenedApp title: ${message.notification}");
+      print("onMessageOpenedApp message: ${message.notification}");
+    }
   });
 
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //   // Handle the notification when the app is in the foreground.
+  //   print("onMessagedata: ${message.data}");
+  //   print("onMessagenotification: ${message.notification}");
+  //   // You can access other fields as needed.
+  // });
+  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  //   // Handle the notification when the user taps it and the app is in the foreground.
+  //   print("onMessageOpenedApp2data: ${message.data}");
+  //   print("onMessageOpenedApp2notification: ${message.notification}");
+  //   // You can access other fields as needed.
+  // });
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission();
   FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
     sound: true,
   );
-
   await FirebaseMessaging.instance.requestPermission(
     alert: true,
     announcement: false,
@@ -49,13 +73,13 @@ Future<void> main() async {
     sound: true,
   );
 
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
   FirebaseMessaging.onMessage.listen((RemoteMessage event) {
-    print("message recieved");
+    print("messagerecieved");
     print(event.notification!.body);
   });
+
   FirebaseMessaging.onMessageOpenedApp.listen((message) {
-    print('Message clicked!');
+    print('Messageclicked!');
   });
 
   final context = SecurityContext.defaultContext;

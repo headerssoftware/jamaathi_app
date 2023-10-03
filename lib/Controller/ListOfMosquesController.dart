@@ -11,7 +11,6 @@ import 'package:jamaathi/Api%20Connect/ApiConnect.dart';
 import 'package:jamaathi/Api%20Connect/JsonResponse/GetMosquesList.dart';
 import 'package:jamaathi/Component/AppPreference.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:intl/intl.dart';
 
 class ListOfMosquesController extends GetxController {
   final CarouselController carouselController = CarouselController();
@@ -24,10 +23,13 @@ class ListOfMosquesController extends GetxController {
   RxBool isVisible = false.obs;
   RxInt selectedIndex = RxInt(0);
   RxString value = RxString("");
-
   @override
   void onInit() async {
     super.onInit();
+  }
+
+  void toggleVisibility() {
+    isVisible.value = !isVisible.value;
   }
 
   String Time(String time) {
@@ -46,8 +48,68 @@ class ListOfMosquesController extends GetxController {
     return formattedTime;
   }
 
-  void toggleVisibility() {
-    isVisible.value = !isVisible.value;
+  // String getLastUpdate(String updateTime) {
+  //   DateTime dateTime = DateFormat("HH:mm:ss").parse(updateTime);
+  //   DateTime input = DateTime.parse(updateTime);
+  //   Duration difference = dateTime.difference(input);
+  //   if (difference.inSeconds < 60) {
+  //     return "Just now";
+  //   } else if (difference.inMinutes < 60) {
+  //     return "Last updated ${difference.inMinutes} minutes ago";
+  //   } else if (difference.inHours < 24) {
+  //     return "Last updated ${difference.inHours} hours ago";
+  //   } else {
+  //     int days = difference.inDays;
+  //     int hours = difference.inHours % 24;
+  //     int minutes = difference.inMinutes % 60;
+  //     int seconds = difference.inSeconds % 60;
+  //     String result = "Last updated $days days";
+  //     if (hours > 0) {
+  //       result += " $hours hours";
+  //     }
+  //     if (minutes > 0) {
+  //       result += " $minutes minutes";
+  //     }
+  //     if (seconds > 0) {
+  //       result += " $seconds seconds";
+  //     }
+  //     result += " ago";
+  //     return result;
+  //   }
+  // }
+  //
+  // // void main() {
+  // //   String updateTime = "2023-10-03T12:30:00";
+  // //   print(getLastUpdate(updateTime));
+  // // }
+
+  String getLastUpdateMessage(String updateTime) {
+    DateTime now = DateTime.now();
+    try {
+      DateTime lastUpdate =
+          DateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(updateTime);
+      int differenceInMinutes = now.difference(lastUpdate).inMinutes;
+      if (differenceInMinutes < 1) {
+        return "Just now";
+      } else if (differenceInMinutes < 60) {
+        return "Last updated $differenceInMinutes minutes ago";
+      } else if (differenceInMinutes < 1440) {
+        int hours = differenceInMinutes ~/ 60;
+        return "Last updated $hours hours ago";
+      } else {
+        int days = differenceInMinutes ~/ 1440;
+        return "Last updated $days days ago";
+      }
+    } catch (e) {
+      return "Invalid datsacadse format";
+    }
+  }
+
+  void main() {
+    String updateTime =
+        "2023-10-03T12:30:00"; // Replace with your actual update time
+    String message = getLastUpdateMessage(updateTime);
+    print(message); // Print the message
   }
 
   getList() async {
