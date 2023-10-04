@@ -1,12 +1,10 @@
 import 'dart:math';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:jamaathi/Component/AppTheme.dart';
 import 'package:jamaathi/Controller/ListOfMosquesController.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ListOfMosques extends GetView<ListOfMosquesController> {
   ListOfMosques({super.key});

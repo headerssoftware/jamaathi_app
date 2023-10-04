@@ -12,6 +12,14 @@ import 'package:jamaathi/firebase_options.dart';
 import 'package:jamaathi/routes/AppPages.dart';
 import 'package:jamaathi/routes/AppRoutes.dart';
 
+Future<void> backgroundHandler(RemoteMessage message) async {
+  //INICIALIZAMOS FIREBASE
+  await Firebase.initializeApp();
+  print('object');
+  print(message.data.toString());
+  print(message.notification!.title);
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPreference().init();
@@ -19,42 +27,28 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    // Handle the notification when the app is in the foreground.
-    print("onMessagedata: ${message.data}");
-    // message.data is where custom notification data is typically sent.
-
-    // You can access other fields as needed.
-    if (message.notification != null) {
-      print("onMessagetitle: ${message.notification}");
-      print("onMessagemessage: ${message.notification}");
-    }
-  });
-
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    // Handle the notification when the user taps it and the app is in the foreground.
-    print("onMessageOpenedApp data: ${message.data}");
-    // message.data is where custom notification data is typically sent.
-
-    // You can access other fields as needed.
-    if (message.notification != null) {
-      print("onMessageOpenedApp title: ${message.notification}");
-      print("onMessageOpenedApp message: ${message.notification}");
-    }
-  });
-
   // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //   // Handle the notification when the app is in the foreground.
   //   print("onMessagedata: ${message.data}");
   //   print("onMessagenotification: ${message.notification}");
-  //   // You can access other fields as needed.
   // });
   // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-  //   // Handle the notification when the user taps it and the app is in the foreground.
   //   print("onMessageOpenedApp2data: ${message.data}");
   //   print("onMessageOpenedApp2notification: ${message.notification}");
-  //   // You can access other fields as needed.
   // });
+
+  // Called when the app is in background state
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+    await backgroundHandler(message);
+    print("onMessagedata: ${message.data}");
+    print("onMessagenotification: ${message.notification}");
+  });
+
+  // Called when the app is in foreground (open)
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    await backgroundHandler(message);
+    print("onMessageOpenedApp2data: ${message.data}");
+    print("onMessageOpenedApp2notification: ${message.notification}");
+  });
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   NotificationSettings settings = await messaging.requestPermission();
@@ -72,15 +66,6 @@ Future<void> main() async {
     provisional: false,
     sound: true,
   );
-
-  FirebaseMessaging.onMessage.listen((RemoteMessage event) {
-    print("messagerecieved");
-    print(event.notification!.body);
-  });
-
-  FirebaseMessaging.onMessageOpenedApp.listen((message) {
-    print('Messageclicked!');
-  });
 
   final context = SecurityContext.defaultContext;
   context.allowLegacyUnsafeRenegotiation = true;
