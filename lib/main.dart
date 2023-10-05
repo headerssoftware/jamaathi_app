@@ -12,46 +12,12 @@ import 'package:jamaathi/firebase_options.dart';
 import 'package:jamaathi/routes/AppPages.dart';
 import 'package:jamaathi/routes/AppRoutes.dart';
 
-Future<void> backgroundHandler(RemoteMessage message) async {
-  //INICIALIZAMOS FIREBASE
-  await Firebase.initializeApp();
-  print('object');
-  print(message.data.toString());
-  print(message.notification!.title);
-}
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPreference().init();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //   print("onMessagedata: ${message.data}");
-  //   print("onMessagenotification: ${message.notification}");
-  // });
-  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-  //   print("onMessageOpenedApp2data: ${message.data}");
-  //   print("onMessageOpenedApp2notification: ${message.notification}");
-  // });
-
-  // Called when the app is in background state
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-    await backgroundHandler(message);
-    print("onMessagedata: ${message.data}");
-    print("onMessagenotification: ${message.notification}");
-  });
-
-  // Called when the app is in foreground (open)
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-    await backgroundHandler(message);
-    print("onMessageOpenedApp2data: ${message.data}");
-    print("onMessageOpenedApp2notification: ${message.notification}");
-  });
-
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings = await messaging.requestPermission();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // FirebaseMessaging messaging = FirebaseMessaging.instance;
+  // NotificationSettings settings = await messaging.requestPermission();
   FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
@@ -66,10 +32,40 @@ Future<void> main() async {
     provisional: false,
     sound: true,
   );
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  _firebaseMessaging.getToken().then((String? token) {
+    assert(token != null);
+  });
 
-  final context = SecurityContext.defaultContext;
-  context.allowLegacyUnsafeRenegotiation = true;
-  final httpClient = HttpClient(context: context);
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print("onMessagedata: ${message.notification?.title}");
+    print("onMessagenotification: ${message.notification?.body}");
+  });
+
+  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  //   print("onMessageOpenedApp2data: ${message.notification?.title}");
+  //   print("onMessageOpenedApp2notification: ${message.notification?.body}");
+  // });
+
+  // Called when the app is in background state
+
+  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+  //   await backgroundHandler(message);
+  //   print("onMessagedata: ${message.data}");
+  //   print("onMessagenotification: ${message.notification}");
+  // });
+  //
+  // // Called when the app is in foreground (open)
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+  //   await backgroundHandler(message);
+  //   print("onMessageOpenedApp2data: ${message.data}");
+  //   print("onMessageOpenedApp2notification: ${message.notification}");
+  // });
+
+  // final context = SecurityContext.defaultContext;
+  // context.allowLegacyUnsafeRenegotiation = true;
+  // final httpClient = HttpClient(context: context);
+
   runApp(const MyApp());
 }
 

@@ -106,8 +106,7 @@ class ListOfMosquesController extends GetxController {
   }
 
   void main() {
-    String updateTime =
-        "2023-10-03T12:30:00"; // Replace with your actual update time
+    String updateTime = "2023-10-03T12:30:00";
     String message = getLastUpdateMessage(updateTime);
     print(message); // Print the message
   }
