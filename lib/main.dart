@@ -32,6 +32,7 @@ Future<void> main() async {
     provisional: false,
     sound: true,
   );
+
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   _firebaseMessaging.getToken().then((String? token) {
     assert(token != null);
@@ -71,7 +72,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

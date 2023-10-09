@@ -48,41 +48,6 @@ class ListOfMosquesController extends GetxController {
     return formattedTime;
   }
 
-  // String getLastUpdate(String updateTime) {
-  //   DateTime dateTime = DateFormat("HH:mm:ss").parse(updateTime);
-  //   DateTime input = DateTime.parse(updateTime);
-  //   Duration difference = dateTime.difference(input);
-  //   if (difference.inSeconds < 60) {
-  //     return "Just now";
-  //   } else if (difference.inMinutes < 60) {
-  //     return "Last updated ${difference.inMinutes} minutes ago";
-  //   } else if (difference.inHours < 24) {
-  //     return "Last updated ${difference.inHours} hours ago";
-  //   } else {
-  //     int days = difference.inDays;
-  //     int hours = difference.inHours % 24;
-  //     int minutes = difference.inMinutes % 60;
-  //     int seconds = difference.inSeconds % 60;
-  //     String result = "Last updated $days days";
-  //     if (hours > 0) {
-  //       result += " $hours hours";
-  //     }
-  //     if (minutes > 0) {
-  //       result += " $minutes minutes";
-  //     }
-  //     if (seconds > 0) {
-  //       result += " $seconds seconds";
-  //     }
-  //     result += " ago";
-  //     return result;
-  //   }
-  // }
-  //
-  // // void main() {
-  // //   String updateTime = "2023-10-03T12:30:00";
-  // //   print(getLastUpdate(updateTime));
-  // // }
-
   String getLastUpdateMessage(String updateTime) {
     DateTime now = DateTime.now();
     try {
