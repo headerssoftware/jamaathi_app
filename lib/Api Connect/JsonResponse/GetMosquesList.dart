@@ -28,11 +28,11 @@ class GetMosquesList {
 
   GetMosquesList.fromJson(Map<String, dynamic> json) {
     masjidId = json['masjidId'];
-    masjidName = json['masjidName'];
-    masjidLocation = json['masjidLocation'];
-    masjidAddress = json['masjidAddress'];
-    masjidPincode = json['masjidPincode'];
-    masjidMadhab = json['masjidMadhab'];
+    masjidName = json['masjidName'] ?? "";
+    masjidLocation = json['masjidLocation'] ?? "";
+    masjidAddress = json['masjidAddress'] ?? "";
+    masjidPincode = json['masjidPincode'] ?? "";
+    masjidMadhab = json['masjidMadhab'] ?? "";
     masjidLastUpdatedTime = json['masjidLastUpdatedTime'] ?? "";
     masjidImagePath = json['masjidImagePath'];
     masjidImageURL = json['masjidImageURL'];
